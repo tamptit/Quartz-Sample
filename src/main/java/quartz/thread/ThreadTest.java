@@ -1,4 +1,4 @@
-package job;
+package quartz.thread;
 
 public class ThreadTest {
 

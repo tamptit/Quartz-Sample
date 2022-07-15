@@ -1,4 +1,4 @@
-package job;
+package quartz.job;
 
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -11,7 +11,6 @@ import org.springframework.scheduling.quartz.CronTriggerBean;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
-import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,6 +46,7 @@ public class DynamicJobExample {
 
         factory.getScheduler().scheduleJob(jobDetail.getObject(), new CronTriggerBean());
         factory.getScheduler().start();
+        factory.getScheduler().shutdown();
         return factory;
     }
 
@@ -57,7 +57,7 @@ public class DynamicJobExample {
         //get the quartzFactory bean
         String[] allBeanNames = context.getBeanDefinitionNames();
 
-        Scheduler scheduler = (Scheduler) context.getBean("scheduler");
+        Scheduler scheduler = (Scheduler) context.getBean("quartz/scheduler");
 //        Scheduler scheduler = new SchedulerTest().getScheduler();
 
         //get the task bean
